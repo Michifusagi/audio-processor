@@ -1,0 +1,20 @@
+以下は、買取営業と顧客の通話を文字起こししたものです。
+この文字起こしには話者分離はありません。発言者の役割（買取業者・顧客）は文脈から推論して判断してください。
+
+============================================================
+# TASK
+会話全体を読んで、終了時点（最後の発話時点）での営業プロセスのフェーズを、下記のラベルから1つだけ選んでください。
+
+- At the time of introduction
+- Hearing about product details
+- At the time of price negotiations
+- At the time of schedule adjustments
+- Just before purchase
+- After closing
+- Other (Use only if not applicable to the above)
+
+必ず上記ラベルからコピペで1つだけ、完全一致でfunction callingのphaseパラメータとして返してください（省略・短縮・翻訳禁止）。
+
+============================================================
+{TRANSCRIPT}
+============================================================ 

@@ -1,0 +1,23 @@
+{
+    "name": "extract_product_info",
+    "description": "顧客との会話から商品情報と売買に関する情報を抽出する",
+    "parameters": {
+        "type": "object",
+        "properties": {
+            "brand": {"type": "string", "description": "ブランド名（不明なら 'unknown'）"},
+            "desired_price": {"type": ["integer", "null"], "description": "顧客が希望する価格（円）"},
+            "quoted_price": {"type": ["integer", "null"], "description": "業者が提示した買取価格（円）"},
+            "condition": {"type": "string", "enum": ["New", "Used", "Scratched", "unspecified"]},
+            "intent": {"type": "string", "enum": ["sell", "negotiate", "inquiry", "just checking", "undetermined"]},
+            "category": {"type": "string", "description": "カテゴリ階層名"},
+            "product_description": {"type": "string"},
+            "age_of_product": {"type": ["string", "null"]},
+            "market_price": {"type": ["integer", "null"]},
+            "product_web_description": {"type": "string"}
+        },
+        "required": [
+            "brand", "desired_price", "quoted_price", "condition", "intent",
+            "category", "product_description", "age_of_product", "market_price", "product_web_description"
+        ]
+    }
+}

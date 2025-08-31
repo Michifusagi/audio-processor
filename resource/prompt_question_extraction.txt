@@ -1,0 +1,46 @@
+以下は、買取営業と顧客の通話を文字起こししたものです。
+この文字起こしには話者分離はありません。発言者の役割（買取業者・顧客）は文脈から推論して判断してください。
+
+本タスクでは、会話の中で「営業（買取業者）」が行った質問・提案のみを抽出してください。顧客側の質問や発言は抽出対象外です。
+
+============================================================
+# TASKS
+1. 抽出対象は「営業（買取業者）」が発した、「売上・アップセルに直結する営業質問・提案」のみとする。  
+    - 疑問形でなくても、営業側の提案に対して顧客が応答していれば抽出候補とみなす。  
+    - 顧客側の質問や発言は抽出しないこと。
+    - 抽出後、**必ず"より自然で丁寧な日本語"にリライト**する。  
+    - 年齢確認・本人確認・住所確認などアップセルに無関係な質問は除外する。
+
+2. 顧客発話から感情を推定し、`positive / neutral / uncertain / negative` のいずれかを付与する。  
+    （迷ったら uncertain）
+
+3. 会話の流れから質問が行われたフェーズを、**下記ラベルからコピペで1つだけ、完全一致で選ぶこと（省略・短縮・翻訳禁止）**。必ず下記のラベルをそのまま使い、「Other」だけの出力は禁止。
+    - At the time of introduction  
+    - Hearing about product details  
+    - At the time of price negotiations  
+    - At the time of schedule adjustments  
+    - Just before purchase  
+    - After closing  
+    - Other (Use only if not applicable to the above)
+
+4. 完成した `{{{{question, customer_emotion, phase}}}}` を **Function Calling** `record_qa_result` で返す。  
+    質問が複数あれば `record_qa_result` を複数回呼び出す。  
+
+5. すべての質問を処理し終えたら、最後に **DONE** のみ出力する（自由テキストは禁止）。
+
+------------------------------------------------------------
+## 出力例
+
+record_qa_result({{
+    "question": "追加で不要なオーディオ機器もご一緒に査定いたしましょうか？",
+    "customer_emotion": "neutral",
+    "phase": "Hearing about product details"
+}})
+
+…
+DONE
+
+============================================================
+## MAIN SECTION
+{TRANSCRIPT}
+============================================================
